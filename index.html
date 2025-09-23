@@ -75,7 +75,7 @@
                 <a href="#Gallery" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Gallery</a>
                 <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
             </div>
-            <button class="md:hidden flex items-center px-3 py-2 border rounded text-gray-500 border-gray-400 hover:text-gray-800 hover:border-gray-800">
+            <button id="hamburger-button" class="md:hidden flex items-center px-3 py-2 border rounded text-gray-500 border-gray-400 hover:text-gray-800 hover:border-gray-800">
                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -83,6 +83,13 @@
                 </svg>
             </button>
         </nav>
+	<div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
+            <div class="flex flex-col items-center space-y-4">
+                <a href="#about" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">About Us</a>
+                <a href="#Gallery" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">Gallery</a>
+                <a href="#contact" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">Contact</a>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -223,7 +230,22 @@
                 lightboxVideo.pause();
             }
         });
+        
+        // Mobile menu functionality
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburgerButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
     </script>
 </body>
 </html>
-
