@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manibhadra CNC Solutions</title>
+    <!-- Updated Title for professionalism -->
+    <title>Manibhadra CNC Solutions - Jodhpur | CNC Cutting & 3D Carving</title>
     <link rel="icon" type="image/x-icon" href="MCS LOGO ONLY.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
+            /* Added smooth scrolling for anchor links */
+            scroll-behavior: smooth;
         }
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 1rem;
         }
-        /* Lightbox styles */
+        /* Lightbox styles (unchanged) */
         .lightbox {
             display: none;
             position: fixed;
@@ -68,13 +71,17 @@
             <div class="flex items-center space-x-4">
                 <!-- Firms logo and name -->
                 <img src="MCS LOGO ONLY.jpg" alt="Manibhadra CNC Solutions Logo" class="h-10 md:h-12 w-auto">
-                <a href="#" class="text-2xl md:text-3xl font-bold text-gray-900">Manibhadra CNC Solutions</a>
+                <a href="#" class="text-xl md:text-2xl font-bold text-gray-900">Manibhadra CNC Solutions</a>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
-                <a href="#Gallery" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Gallery</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <!-- NAV LINKS UPDATED TO RED -->
+                <a href="#about" class="text-gray-600 hover:text-red-700 font-medium transition-colors">About Us</a>
+                <a href="#services" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Services</a>
+                <a href="#Gallery" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Contact</a>
             </div>
+            <!-- Mobile Menu Button -->
             <button id="hamburger-button" class="md:hidden flex items-center px-3 py-2 border rounded text-gray-500 border-gray-400 hover:text-gray-800 hover:border-gray-800">
                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -83,11 +90,14 @@
                 </svg>
             </button>
         </nav>
-	<div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
             <div class="flex flex-col items-center space-y-4">
-                <a href="#about" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">About Us</a>
-                <a href="#Gallery" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">Gallery</a>
-                <a href="#contact" class="mobile-link text-gray-600 hover:text-blue-600 font-medium transition-colors w-full text-center py-2">Contact</a>
+                <!-- NAV LINKS UPDATED TO RED -->
+                <a href="#about" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">About Us</a>
+                <a href="#services" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Services</a>
+                <a href="#Gallery" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Gallery</a>
+                <a href="#contact" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Contact</a>
             </div>
         </div>
     </header>
@@ -102,7 +112,8 @@
                 <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
                     Based in Jodhpur, Rajasthan, we specialize in transforming spaces with custom CNC-cut designs for temples, panels, and intricate interior details.
                 </p>
-                <a href="#contact" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                <!-- BUTTON UPDATED TO RED -->
+                <a href="#contact" class="bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-800 transition-transform transform hover:scale-105">
                     Discuss Your Project
                 </a>
             </div>
@@ -111,9 +122,8 @@
         <!-- About Us Section -->
         <section id="about" class="py-16 bg-gray-100">
             <div class="container">
-                <div class="md:flex md:items-center md:space-x-8">
+                <div class="md:flex md:items-center md:space-x-12">
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <!-- Firms logo and name replacing the lavender box -->
                         <img src="MCS 2.jpg" alt="Manibhadra CNC Solutions Logo" class="rounded-3xl shadow-xl w-full h-auto">
                     </div>
                     <div class="md:w-2/3">
@@ -129,8 +139,70 @@
             </div>
         </section>
 
+        <!-- NEW: Our Services Section -->
+        <section id="services" class="py-16 bg-white">
+            <div class="container text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service 1: 3D Carving (UPDATED SVG) -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-red-100 p-5 rounded-full mb-4">
+                            <!-- SVG for 3D -->
+                            <svg class="w-10 h-10 text-red-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <text x="12" y="18" font-size="14" font-weight="bold" text-anchor="middle" fill="currentColor">3D</text>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">3D Relief Carving</h3>
+                        <p class="text-gray-600 text-lg">We create stunning 3D relief carvings, bringing depth and artistry to panels, doors, and custom art pieces.</p>
+                    </div>
+                    
+                    <!-- Service 2: 2D Jali/Cutting (UPDATED SVG) -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-red-100 p-5 rounded-full mb-4">
+                            <!-- SVG for 2D -->
+                            <svg class="w-10 h-10 text-red-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <text x="12" y="18" font-size="14" font-weight="bold" text-anchor="middle" fill="currentColor">2D</text>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">2D Jali & Panel Cutting</h3>
+                        <p class="text-gray-600 text-lg">Precision 2D cutting for intricate jali screens, room dividers, and decorative panels in various materials.</p>
+                    </div>
+                    <!-- Service 3: Temple Art (UPDATED SVG) -->
+                    <div class="flex flex-col items-center">
+                             <!-- SVG for Om -->
+                    <!-- Service 3: Temple Art (UPDATED to use temple.png) -->
+                    <div class="flex flex-col items-center">
+                        <!-- Image for Temple -->
+                        <img src="temple.png" alt="Temple Icon" class="w-20 h-20 rounded-full mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Custom Temple Design</h3>
+                        <p class="text-gray-600 text-lg">We specialize in crafting bespoke home temples and religious art, from back panels to complete mandir structures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <!-- The Lightbox Modal -->
+        <!-- NEW: Testimonials Section -->
+        <section id="testimonials" class="py-16 bg-gray-100">
+            <div class="container text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Placeholder Testimonial 1 (UPDATED TO RED) -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-left">
+                        <p class="text-lg text-gray-700 italic mb-4">"The 3D carving Manibhadra CNC Solutions did for our lobby is a true masterpiece. Their attention to detail and professionalism was outstanding."</p>
+                        <h4 class="text-xl font-bold text-red-700">— Placeholder Name</h4>
+                        <p class="text-gray-500">Architect, Jodhpur</p>
+                    </div>
+                    <!-- Placeholder Testimonial 2 (UPDATED TO RED) -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-left">
+                        <p class="text-lg text-gray-700 italic mb-4">"We are so thrilled with our new home temple. The craftsmanship is exquisite, and they brought our exact vision to life. Highly recommend!"</p>
+                        <h4 class="text-xl font-bold text-red-700">— Placeholder Name</h4>
+                        <p class="text-gray-500">Homeowner, Rajasthan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Lightbox Modal (Unchanged, but needed for gallery) -->
         <div id="lightbox" class="lightbox">
             <span class="lightbox-close" id="closeBtn">&times;</span>
             <div id="lightbox-content-container">
@@ -139,26 +211,52 @@
             </div>
         </div>
 
-        <!-- gallery -->
-        <section id="Gallery" class="py-16 bg-gray-100">
+        <!-- UPDATED: Gallery Links Section -->
+        <section id="Gallery" class="py-16 bg-white">
             <div class="container text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Gallery</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8">
-                    <!-- temple -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2 mx-auto">
-                        <a href="mandir.html" class="block mt-4 text-blue-600 hover:text-blue-800 transition-colors text-center text-4xl font-medium"> Temple </a>
-                    </div>
-                    <!-- 2d -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2 mx-auto">
-                        <a href="a2D.html" class="block mt-4 text-blue-600 hover:text-blue-800 transition-colors text-center text-4xl font-medium"> 2D </a>
-                    </div>
-                    <!-- 3d -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2 mx-auto">
-                        <a href="a3D.html" class="block mt-4 text-blue-600 hover:text-blue-800 transition-colors text-center text-4xl font-medium"> 3D </a>
-                    </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Explore Our Work</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Temple Gallery Card (UPDATED TO RED) -->
+                    <a href="mandir.html" class="group block bg-white rounded-2xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div class="relative">
+                            <img src="14t.jpg" alt="Home Temple CNC Design" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-10 transition-all"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold text-red-700 group-hover:text-red-900 transition-colors">Temples</h3>
+                            <p class="text-gray-600 mt-2">View our gallery of custom home temples and religious art.</p>
+                        </div>
+                    </a>
+
+                    <!-- 2D Gallery Card (UPDATED TO RED) -->
+                    <a href="a2D.html" class="group block bg-white rounded-2xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div class="relative">
+                            <img src="a4.jpg" alt="2D Jali Panel" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-10 transition-all"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold text-red-700 group-hover:text-red-900 transition-colors">2D Designs</h3>
+                            <p class="text-gray-600 mt-2">See our intricate 2D jali screens and decorative panels.</p>
+                        </div>
+                    </a>
+
+                    <!-- 3D Gallery Card (UPDATED TO RED) -->
+                    <a href="a3D.html" class="group block bg-white rounded-2xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div class="relative">
+                            <img src="b2.jpg" alt="3D Horse Carving" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-10 transition-all"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold text-red-700 group-hover:text-red-900 transition-colors">3D Carvings</h3>
+                            <p class="text-gray-600 mt-2">Discover our detailed 3D relief carvings and sculptures.</p>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </section>
+
         <!-- Contact Section -->
         <section id="contact" class="py-16 bg-gray-100">
             <div class="container text-center">
@@ -167,19 +265,19 @@
                     Get in touch with our team to discuss your project and bring your artistic vision to life.
                 </p>
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8">
-                    <!-- Contact Card 1 -->
+                    <!-- Contact Card 1 (UPDATED TO RED) -->
                     <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2">
-                        <h3 class="text-2xl font-bold text-blue-600 mb-2">Asit Mehta</h3>
+                        <h3 class="text-2xl font-bold text-red-700 mb-2">Asit Mehta</h3>
                         <p class="text-lg text-gray-700">Owner</p>
-                        <a href="tel:+919660499044" class="block mt-4 text-blue-600 hover:text-blue-800 transition-colors text-lg font-medium">
+                        <a href="tel:+919660499044" class="block mt-4 text-red-700 hover:text-red-900 transition-colors text-lg font-medium">
                             +91 96604 99044
                         </a>
                     </div>
-                    <!-- Contact Card 2 -->
+                    <!-- Contact Card 2 (UPDATED TO RED) -->
                     <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2">
-                        <h3 class="text-2xl font-bold text-blue-600 mb-2">Bhavya Mehta</h3>
+                        <h3 class="text-2xl font-bold text-red-700 mb-2">Bhavya Mehta</h3>
                         <p class="text-lg text-gray-700">Sales & Support</p>
-                        <a href="tel:+918619212179" class="block mt-4 text-blue-600 hover:text-blue-800 transition-colors text-lg font-medium">
+                        <a href="tel:+918619212179" class="block mt-4 text-red-700 hover:text-red-900 transition-colors text-lg font-medium">
                             +91 86192 12179
                         </a>
                     </div>
@@ -191,12 +289,35 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 mt-12">
         <div class="container text-center">
-            <p>&copy; 2021 Manibhadra CNC Solutions. All Rights Reserved.</p>
+            <p>&copy; 2021-2024 Manibhadra CNC Solutions. All Rights Reserved.</p>
             <p class="text-sm mt-2">Steel Bhawan and Electronic Complex, 28A, Light Industrial Area, adjacent Lane of Fresh and Green, Shastri Nagar, Jodhpur, Rajasthan 342003</p>
+            
+            <!-- UPDATED: Social and Map Links -->
+            <div class="flex justify-center items-center mt-6 space-x-6">
+                <!-- WhatsApp Link -->
+                <a href="https://whatsapp.com/channel/0029VaiUXmV4Y9lpi0Ao570h" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
+                    <span class="sr-only">WhatsApp</span>
+                    <img src="whatsapp.png" alt="WhatsApp" class="w-7 h-7">
+                </a>
+                
+                <!-- Instagram Link -->
+                <a href="https://www.instagram.com/manibhadracnc?igsh=M25uamk0NHJqbGF5" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
+                    <span class="sr-only">Instagram</span>
+                    <img src="insta.png" alt="Instagram" class="w-7 h-7">
+                </a>
+
+                <!-- Google Maps Link -->
+                <a href="https://maps.app.goo.gl/Bnd1Nz7vFM3FyeiaA" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
+                    <span class="sr-only">Our Location</span>
+                    <img src="map.png" alt="Location Pin" class="w-5 h-7">
+                </a>
+            </div>
+
         </div>
     </footer>
     
     <script>
+        // Lightbox script (unchanged)
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxVideo = document.getElementById('lightboxVideo');
@@ -219,26 +340,32 @@
             });
         });
 
-        closeBtn.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-            lightboxVideo.pause();
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox') {
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
                 lightbox.style.display = 'none';
                 lightboxVideo.pause();
-            }
-        });
+            });
+        }
+
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox') {
+                    lightbox.style.display = 'none';
+                    lightboxVideo.pause();
+                }
+            });
+        }
         
         // Mobile menu functionality
         const hamburgerButton = document.getElementById('hamburger-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        hamburgerButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (hamburgerButton) {
+            hamburgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -249,3 +376,4 @@
     </script>
 </body>
 </html>
+
