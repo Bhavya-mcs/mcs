@@ -64,12 +64,41 @@
             font-size: 40px;
             font-weight: bold;
             transition: 0.3s;
+            z-index: 1002; /* Ensure above nav */
         }
         .lightbox-close:hover,
         .lightbox-close:focus {
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
+        }
+        /* NEW: Lightbox Navigation */
+        .lightbox-nav {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: rgba(0,0,0,0.3);
+            z-index: 1001; /* Ensure it's above content */
+        }
+        .lightbox-next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .lightbox-prev {
+            left: 0;
+        }
+        .lightbox-nav:hover {
+            background-color: rgba(0,0,0,0.8);
         }
     </style>
 </head>
@@ -122,33 +151,33 @@
                 
                 <div class="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
                     <!-- Gallery Images and Videos -->
-                    <img src="1t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="2t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="3t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="4t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="5t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="6t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="7t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="8t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="9t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="10t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="11t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="12t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="14t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="15t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="16t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="17t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="18t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="19t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="20t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="21t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="22t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="23t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="24t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="25t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="26t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="27t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
-                    <img src="28t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105">
+                    <img src="1t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="2t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="3t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="4t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="5t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="6t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="7t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="8t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="9t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="10t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="11t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="12t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="14t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="15t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="16t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="17t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="18t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="19t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="20t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="21t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="22t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="23t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="24t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="25t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="26t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="27t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
+                    <img src="28t.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
                     <!-- Assuming video files are in the same directory -->
                     <video controls src="29t.mp4" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none'">Video not found</video>
                     <video controls src="30t.mp4" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none'">Video not found</video>
@@ -166,6 +195,11 @@
         <!-- The Lightbox Modal -->
         <div id="lightbox" class="lightbox">
             <span class="lightbox-close" id="closeBtn">&times;</span>
+            
+            <!-- NEW: Navigation Buttons -->
+            <a class="lightbox-nav lightbox-prev" id="lightboxPrev" style="display: none;">&#10094;</a>
+            <a class="lightbox-nav lightbox-next" id="lightboxNext" style="display: none;">&#10095;</a>
+
             <div id="lightbox-content-container">
                 <img class="lightbox-content" id="lightboxImg" style="display: none;">
                 <video class="lightbox-content lightbox-video" id="lightboxVideo" controls style="display: none;"></video>
@@ -231,11 +265,19 @@
         </div>
     </footer>
     
+    <!-- UPDATED: Lightbox Script -->
     <script>
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxVideo = document.getElementById('lightboxVideo');
         const closeBtn = document.getElementById('closeBtn');
+        const prevBtn = document.getElementById('lightboxPrev');
+        const nextBtn = document.getElementById('lightboxNext');
+
+        // let galleryItems = []; // OLD
+        const galleryItemsNodeList = document.querySelectorAll('.gallery-item');
+        const galleryItems = Array.from(galleryItemsNodeList); // Convert NodeList to Array
+        let currentIndex = 0;
 
         // --- Zoom and Pan Variables ---
         let scale = 1;
@@ -257,28 +299,53 @@
             lightboxImg.classList.remove('panning');
         }
 
+        // --- Show Item Function ---
+        function showItem(index) {
+            // Wrap around
+            if (index >= galleryItems.length) {
+                index = 0;
+            }
+            if (index < 0) {
+                index = galleryItems.length - 1;
+            }
+            
+            currentIndex = index;
+            const item = galleryItems[currentIndex];
+
+            if (item.tagName === 'IMG') {
+                resetImageTransform(); // Reset transform for new image
+                lightboxImg.src = item.src;
+                lightboxImg.style.display = 'block';
+                lightboxVideo.style.display = 'none';
+                lightboxVideo.pause();
+            } else if (item.tagName === 'VIDEO') {
+                resetImageTransform(); // Also reset for videos to hide img
+                lightboxVideo.src = item.src;
+                lightboxVideo.style.display = 'block';
+                lightboxImg.style.display = 'none';
+                lightboxVideo.play();
+            }
+        }
+
         // --- Open Lightbox ---
-        document.querySelectorAll('.gallery-item').forEach(item => {
+        // document.querySelectorAll('.gallery-item').forEach((item, index) => { // OLD
+        galleryItems.forEach((item, index) => { // NEW: Iterate over the array
+            // Populate the galleryItems array
+            // galleryItems.push(item); // OLD
+            
             item.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
-                if (item.tagName === 'IMG') {
-                    resetImageTransform(); // Reset transform on open
-                    lightboxImg.src = item.src;
-                    lightboxImg.style.display = 'block';
-                    lightboxVideo.style.display = 'none';
-                    lightboxVideo.pause();
-                } else if (item.tagName === 'VIDEO') {
-                    lightboxVideo.src = item.src;
-                    lightboxVideo.style.display = 'block';
-                    lightboxImg.style.display = 'none';
-                    lightboxVideo.play();
-                }
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+                showItem(index);
             });
         });
 
         // --- Close Lightbox ---
         function closeLightbox() {
             lightbox.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
             lightboxVideo.pause();
             resetImageTransform(); // Reset transform on close
         }
@@ -289,6 +356,18 @@
                 closeLightbox();
             }
         });
+
+        // --- Navigation Button Listeners ---
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent lightbox click-to-close
+            showItem(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent lightbox click-to-close
+            showItem(currentIndex + 1);
+        });
+
 
         // --- Panning Logic (Mouse) ---
         lightboxImg.addEventListener('mousedown', (e) => {
@@ -344,10 +423,7 @@
                 lightboxImg.style.maxHeight = 'none';
 
                 // --- Zoom centered on mouse pointer ---
-                // This logic calculates the new translation needed to keep the point
-                // under the mouse in the same place after scaling.
                 const rect = lightboxImg.getBoundingClientRect();
-                // Mouse position relative to the image (not the viewport)
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
                 
@@ -384,4 +460,3 @@
     </script>
 </body>
 </html>
-
