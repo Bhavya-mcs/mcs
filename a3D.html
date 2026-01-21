@@ -8,432 +8,200 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#991b1b',
+                            dark: '#1c1917',
+                            light: '#fafaf9',
+                            accent: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            scroll-behavior: smooth;
-        }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        /* Lightbox styles */
+        body { background-color: #fafaf9; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .lightbox {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            background-color: rgba(28, 25, 23, 0.95);
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
+        .lightbox.show { opacity: 1; }
         .lightbox-content {
-            /* Updated for zoom and pan */
-            margin: auto;
-            display: block;
-            /* Start with constraints */
-            width: auto;
-            height: auto;
             max-width: 90vw;
-            max-height: 90vh;
-            /* Setup for transform */
-            transform: scale(1) translate(0, 0);
-            transition: transform 0.2s ease-out;
+            max-height: 85vh;
+            object-fit: contain;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             cursor: grab;
         }
-        .lightbox-content.panning {
-            cursor: grabbing;
-            transition: none; /* Make panning instant */
-        }
-        .lightbox-video {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 1002; /* Ensure above nav */
-        }
-        .lightbox-close:hover,
-        .lightbox-close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-         /* NEW: Lightbox Navigation */
-         .lightbox-nav {
-            cursor: pointer;
+        .lightbox-content.panning { cursor: grabbing; }
+        .nav-btn {
             position: absolute;
             top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -22px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
             color: white;
-            font-weight: bold;
-            font-size: 30px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s;
             user-select: none;
-            -webkit-user-select: none;
-            background-color: rgba(0,0,0,0.3);
-            z-index: 1001; /* Ensure it's above content */
+            font-size: 1.5rem;
         }
-        .lightbox-next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
+        .nav-btn:hover { background: rgba(255,255,255,0.2); }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 2002;
+            line-height: 1;
         }
-        .lightbox-prev {
-            left: 0;
-        }
-        .lightbox-nav:hover {
-            background-color: rgba(0,0,0,0.8);
+        .gallery-image-wrapper {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #e7e5e4;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="text-stone-800 antialiased flex flex-col min-h-screen">
 
-    <!-- UPDATED: Header & Navigation -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container flex items-center justify-between py-4">
-            <div class="flex items-center space-x-4">
-                <!-- Firms logo and name -->
-                <img src="MCS LOGO ONLY.jpg" alt="Manibhadra CNC Solutions Logo" class="h-10 md:h-12 w-auto">
-                <!-- Links back to home -->
-                <a href="index.html" class="text-xl md:text-2xl font-bold text-gray-900">Manibhadra CNC Solutions</a>
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 glass-nav shadow-sm border-b border-stone-100">
+        <nav class="container mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                 <a href="index.html">
+                    <img src="MCS LOGO ONLY.jpg" alt="Logo" class="h-10 md:h-12 w-auto object-contain">
+                </a>
+                <a href="index.html" class="text-xl md:text-2xl font-bold font-serif text-stone-900 tracking-tight">Manibhadra CNC</a>
             </div>
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-8">
-                <!-- Updated links to point to index.html sections -->
-                <a href="index.html#about" class="text-gray-600 hover:text-red-700 font-medium transition-colors">About Us</a>
-                <a href="index.html#services" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Services</a>
-                <a href="index.html#Gallery" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Gallery</a>
-                <a href="#contact" class="text-gray-600 hover:text-red-700 font-medium transition-colors">Contact</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium text-stone-600 hover:text-brand-red transition-colors uppercase tracking-wide">Home</a>
+                <a href="index.html#services" class="text-sm font-medium text-stone-600 hover:text-brand-red transition-colors uppercase tracking-wide">Services</a>
+                <a href="index.html#Gallery" class="text-sm font-medium text-brand-red transition-colors uppercase tracking-wide">Gallery</a>
+                <a href="index.html#contact" class="px-5 py-2 bg-brand-red text-white text-sm font-medium rounded-full hover:bg-red-900 transition-colors shadow-md">Contact Us</a>
             </div>
-            <!-- Mobile Menu Button -->
-            <button id="hamburger-button" class="md:hidden flex items-center px-3 py-2 border rounded text-gray-500 border-gray-400 hover:text-gray-800 hover:border-gray-800">
-                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
+             <button id="hamburger-button" class="md:hidden p-2 text-stone-600 hover:text-brand-red">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </nav>
-        <!-- Mobile Menu (UPDATED TO RED) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 transition-all duration-300 ease-in-out">
-            <div class="flex flex-col items-center space-y-4">
-                <!-- Updated links for mobile -->
-                <a href="index.html#about" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">About Us</a>
-                <a href="index.html#services" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Services</a>
-                <a href="index.html#Gallery" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Gallery</a>
-                <a href="#contact" class="mobile-link text-gray-600 hover:text-red-700 font-medium transition-colors w-full text-center py-2">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 absolute w-full left-0 shadow-lg">
+            <div class="flex flex-col p-4 space-y-4 text-center">
+                <a href="index.html" class="mobile-link text-stone-600 font-medium py-2">Home</a>
+                <a href="index.html#Gallery" class="mobile-link text-brand-red font-medium py-2">Gallery</a>
+                <a href="index.html#contact" class="mobile-link text-stone-600 font-bold py-2">Contact</a>
             </div>
         </div>
     </header>
 
-    <main>
-        <!-- Gallery Section -->
-        <section id="gallery" class="py-16 bg-white">
-            <div class="container">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">3D Carving Gallery</h2>
-                <p class="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">View our stunning 3D relief carvings, portraits, and artistic sculptures.</p>
-                <div class="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-                    <!-- Gallery Images and Videos -->
-                    <img src="b1.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b2.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b3.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b4.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b5.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b6.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b7.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b8.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b9.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <img src="b10.jpg" alt="CNC Project" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none';">
-                    <video controls src="b11.mp4" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none'">Video not found</video>
-                    <video controls src="b12.mp4" class="gallery-item w-full h-auto rounded-xl shadow-md cursor-pointer transition-transform transform hover:scale-105" onerror="this.style.display='none'">Video not found</video>
-                </div>
+    <main class="flex-grow pt-24 pb-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-2 block">Portfolio Collection</span>
+                <h1 class="text-4xl md:text-5xl font-bold font-serif text-stone-900 mb-4">3D Relief & Carving</h1>
+                <p class="text-stone-600 max-w-2xl mx-auto text-lg">View our stunning 3D relief carvings, portraits, and artistic sculptures.</p>
             </div>
-        </section>
 
-        <!-- The Lightbox Modal -->
-        <div id="lightbox" class="lightbox">
-            <span class="lightbox-close" id="closeBtn">&times;</span>
-
-            <!-- NEW: Navigation Buttons -->
-            <a class="lightbox-nav lightbox-prev" id="lightboxPrev" style="display: none;">&#10094;</a>
-            <a class="lightbox-nav lightbox-next" id="lightboxNext" style="display: none;">&#10095;</a>
-
-            <div id="lightbox-content-container">
-                <img class="lightbox-content" id="lightboxImg" style="display: none;">
-                <video class="lightbox-content lightbox-video" id="lightboxVideo" controls style="display: none;"></video>
+            <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+                <!-- Gallery Images -->
+                <div class="gallery-image-wrapper group"><img src="b1.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b2.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b3.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b4.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b5.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b6.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b7.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b8.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b9.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                <div class="gallery-image-wrapper group"><img src="b10.jpg" class="gallery-item w-full h-auto transform transition-transform duration-500 group-hover:scale-105 cursor-pointer" onerror="this.parentElement.style.display='none'"></div>
+                
+                <div class="gallery-image-wrapper group">
+                    <video controls src="b11.mp4" class="gallery-item w-full h-auto cursor-pointer" onerror="this.parentElement.style.display='none'"></video>
+                </div>
+                 <div class="gallery-image-wrapper group">
+                    <video controls src="b12.mp4" class="gallery-item w-full h-auto cursor-pointer" onerror="this.parentElement.style.display='none'"></video>
+                </div>
             </div>
         </div>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 bg-gray-100">
-            <div class="container text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
-                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                    Get in touch with our team to discuss your project and bring your artistic vision to life.
-                </p>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8">
-                    <!-- Contact Card 1 (UPDATED TO RED) -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2">
-                        <h3 class="text-2xl font-bold text-red-700 mb-2">Asit Mehta</h3>
-                        <p class="text-lg text-gray-700">Founder</p>
-                        <a href="tel:+919660499044" class="block mt-4 text-red-700 hover:text-red-900 transition-colors text-lg font-medium">
-                            +91 96604 99044
-                        </a>
-                    </div>
-                    <!-- Contact Card 2 (UPDATED TO RED) -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg w-full md:w-1/2">
-                        <h3 class="text-2xl font-bold text-red-700 mb-2">Bhavya Mehta</h3>
-                        <p class="text-lg text-gray-700">Co-Founder</p>
-                        <a href="tel:+918619212179" class="block mt-4 text-red-700 hover:text-red-900 transition-colors text-lg font-medium">
-                            +91 86192 12179
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
-        <div class="container text-center">
-            <p>&copy; 2021-2026 Manibhadra CNC Solutions. All Rights Reserved.</p>
-            <p class="text-sm mt-2">Steel Bhawan and Electronic Complex, 28A, Light Industrial Area, adjacent Lane of Fresh and Green, Shastri Nagar, Jodhpur, Rajasthan 342003</p>
-            
-            <!-- UPDATED: Social and Map Links -->
-            <div class="flex justify-center items-center mt-6 space-x-6">
-                <!-- WhatsApp Link -->
-                <a href="https://whatsapp.com/channel/0029VaiUXmV4Y9lpi0Ao570h" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
-                    <span class="sr-only">WhatsApp</span>
-                    <img src="whatsapp.png" alt="WhatsApp" class="w-7 h-7">
-                </a>
-                
-                <!-- Instagram Link -->
-                <a href="https://www.instagram.com/manibhadracnc?igsh=M25uamk0NHJqbGF5" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
-                    <span class="sr-only">Instagram</span>
-                    <img src="insta.png" alt="Instagram" class="w-7 h-7">
-                </a>
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <div class="nav-btn prev-btn" id="lightboxPrev">&#10094;</div>
+        <div class="nav-btn next-btn" id="lightboxNext">&#10095;</div>
+        <img class="lightbox-content" id="lightboxImg" style="display: none;">
+        <video class="lightbox-content" id="lightboxVideo" controls style="display: none;"></video>
+    </div>
 
-                <!-- Google Maps Link -->
-                <a href="https://maps.app.goo.gl/Bnd1Nz7vFM3FyeiaA" target="_blank" rel="noopener noreferrer" class="opacity-75 hover:opacity-100 transition-opacity">
-                    <span class="sr-only">Our Location</span>
-                    <img src="map.png" alt="Location Pin" class="w-5 h-7">
-                </a>
-            </div>
-
+    <footer class="bg-stone-950 text-stone-400 py-12 border-t border-stone-900">
+        <div class="container mx-auto px-4 text-center">
+             <p class="text-xs text-stone-600">&copy; 2021-2026 Manibhadra CNC Solutions. Jodhpur, Rajasthan.</p>
         </div>
     </footer>
-    
-    <!-- UPDATED: Lightbox Script -->
+
     <script>
+        document.getElementById('hamburger-button').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
+
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxVideo = document.getElementById('lightboxVideo');
-        const closeBtn = document.getElementById('closeBtn');
-        const prevBtn = document.getElementById('lightboxPrev');
-        const nextBtn = document.getElementById('lightboxNext');
+        const items = Array.from(document.querySelectorAll('.gallery-item'));
+        let currentIndex = 0, scale = 1, isPanning = false, startPoint = {x:0,y:0}, currTranslate = {x:0,y:0};
 
-        // let galleryItems = []; // OLD
-        const galleryItemsNodeList = document.querySelectorAll('.gallery-item');
-        const galleryItems = Array.from(galleryItemsNodeList); // Convert NodeList to Array
-        let currentIndex = 0;
+        function resetTransform() { scale = 1; currTranslate = {x:0,y:0}; lightboxImg.style.transform = `scale(1) translate(0px,0px)`; }
 
-        // --- Zoom and Pan Variables ---
-        let scale = 1;
-        let isPanning = false;
-        let startPan = { x: 0, y: 0 };
-        let currentTranslate = { x: 0, y: 0 };
-        let lastTranslate = { x: 0, y: 0 };
-        // ------------------------------
-
-        // Function to reset image transform
-        function resetImageTransform() {
-            scale = 1;
-            currentTranslate = { x: 0, y: 0 };
-            lastTranslate = { x: 0, y: 0 };
-            lightboxImg.style.transform = 'scale(1) translate(0px, 0px)';
-            lightboxImg.style.maxWidth = '90vw';
-            lightboxImg.style.maxHeight = '90vh';
-            lightboxImg.style.transition = 'transform 0.2s ease-out';
-            lightboxImg.classList.remove('panning');
-        }
-
-        // --- Show Item Function ---
         function showItem(index) {
-            // Wrap around
-            if (index >= galleryItems.length) {
-                index = 0;
-            }
-            if (index < 0) {
-                index = galleryItems.length - 1;
-            }
-            
+            if(index >= items.length) index = 0;
+            if(index < 0) index = items.length - 1;
             currentIndex = index;
-            const item = galleryItems[currentIndex];
-
-            if (item.tagName === 'IMG') {
-                resetImageTransform(); // Reset transform for new image
-                lightboxImg.src = item.src;
-                lightboxImg.style.display = 'block';
-                lightboxVideo.style.display = 'none';
-                lightboxVideo.pause();
-            } else if (item.tagName === 'VIDEO') {
-                resetImageTransform(); // Also reset for videos to hide img
-                lightboxVideo.src = item.src;
-                lightboxVideo.style.display = 'block';
-                lightboxImg.style.display = 'none';
-                lightboxVideo.play();
-            }
-        }
-
-        // --- Open Lightbox ---
-        // document.querySelectorAll('.gallery-item').forEach((item, index) => { // OLD
-        galleryItems.forEach((item, index) => { // NEW: Iterate over the array
-            // Populate the galleryItems array
-            // galleryItems.push(item); // OLD
-            
-            item.addEventListener('click', () => {
-                lightbox.style.display = 'flex';
-                prevBtn.style.display = 'block';
-                nextBtn.style.display = 'block';
-                showItem(index);
-            });
-        });
-
-        // --- Close Lightbox ---
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-            lightboxVideo.pause();
-            resetImageTransform(); // Reset transform on close
-        }
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox' || e.target.id === 'lightbox-content-container') {
-                closeLightbox();
-            }
-        });
-
-        // --- Navigation Button Listeners ---
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent lightbox click-to-close
-            showItem(currentIndex - 1);
-        });
-
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent lightbox click-to-close
-            showItem(currentIndex + 1);
-        });
-
-
-        // --- Panning Logic (Mouse) ---
-        lightboxImg.addEventListener('mousedown', (e) => {
-            if (e.button !== 0) return; // Only pan on left click
-            e.preventDefault();
-            isPanning = true;
-            startPan.x = e.clientX - lastTranslate.x;
-            startPan.y = e.clientY - lastTranslate.y;
-            lightboxImg.classList.add('panning');
-        });
-
-        lightboxImg.addEventListener('mousemove', (e) => {
-            if (!isPanning) return;
-            e.preventDefault();
-            currentTranslate.x = e.clientX - startPan.x;
-            currentTranslate.y = e.clientY - startPan.y;
-            lightboxImg.style.transform = `scale(${scale}) translate(${currentTranslate.x}px, ${currentTranslate.y}px)`;
-        });
-
-        function endPan() {
-            if (!isPanning) return;
-            isPanning = false;
-            lastTranslate.x = currentTranslate.x;
-            lastTranslate.y = currentTranslate.y;
-            lightboxImg.classList.remove('panning');
-        }
-
-        lightboxImg.addEventListener('mouseup', endPan);
-        lightboxImg.addEventListener('mouseleave', endPan);
-
-        // --- Zoom Logic (Mouse Wheel) ---
-        lightbox.addEventListener('wheel', (e) => {
-            if (lightboxImg.style.display !== 'block') return; // Don't zoom if video is playing
-
-            e.preventDefault();
-            const zoomSpeed = 0.1;
-            const oldScale = scale;
-
-            if (e.deltaY < 0) {
-                scale += zoomSpeed;
+            const item = items[index];
+            resetTransform();
+            if(item.tagName === 'IMG') {
+                lightboxImg.src = item.src; lightboxImg.style.display = 'block'; lightboxVideo.style.display = 'none'; lightboxVideo.pause();
             } else {
-                scale -= zoomSpeed;
+                lightboxVideo.src = item.src; lightboxVideo.style.display = 'block'; lightboxImg.style.display = 'none'; lightboxVideo.play();
             }
-            
-            scale = Math.max(1, Math.min(scale, 5)); // Clamp scale (min 1x, max 5x)
-
-            if (scale === 1) {
-                // Reset to center
-                resetImageTransform();
-            } else {
-                // Allow image to be its full size (or bigger)
-                lightboxImg.style.maxWidth = 'none';
-                lightboxImg.style.maxHeight = 'none';
-
-                // --- Zoom centered on mouse pointer ---
-                const rect = lightboxImg.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-                
-                // Calculate new translation
-                const newTranslateX = (currentTranslate.x * scale / oldScale) - (mouseX * (scale / oldScale - 1));
-                const newTranslateY = (currentTranslate.y * scale / oldScale) - (mouseY * (scale / oldScale - 1));
-
-                currentTranslate.x = newTranslateX;
-                currentTranslate.y = newTranslateY;
-                lastTranslate.x = newTranslateX;
-                lastTranslate.y = newTranslateY;
-
-                lightboxImg.style.transform = `scale(${scale}) translate(${currentTranslate.x}px, ${currentTranslate.y}px)`;
-            }
-        });
-
-
-        // Mobile menu functionality
-        const hamburgerButton = document.getElementById('hamburger-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        if(hamburgerButton) {
-            hamburgerButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
         }
 
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+        items.forEach((item, index) => item.addEventListener('click', () => { lightbox.style.display = 'flex'; setTimeout(() => lightbox.classList.add('show'), 10); showItem(index); }));
+        const closeLightbox = () => { lightbox.classList.remove('show'); setTimeout(() => { lightbox.style.display = 'none'; lightboxVideo.pause(); }, 300); }
+        document.getElementById('closeBtn').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', (e) => { e.stopPropagation(); showItem(currentIndex - 1); });
+        document.getElementById('lightboxNext').addEventListener('click', (e) => { e.stopPropagation(); showItem(currentIndex + 1); });
+        lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+        lightbox.addEventListener('wheel', (e) => { if(lightboxImg.style.display === 'none') return; e.preventDefault(); scale += e.deltaY * -0.001; scale = Math.min(Math.max(1, scale), 4); lightboxImg.style.transform = `scale(${scale}) translate(${currTranslate.x}px, ${currTranslate.y}px)`; });
+        lightboxImg.addEventListener('mousedown', e => { isPanning = true; startPoint = {x: e.clientX - currTranslate.x, y: e.clientY - currTranslate.y}; lightboxImg.classList.add('panning'); });
+        window.addEventListener('mousemove', e => { if(!isPanning) return; e.preventDefault(); currTranslate = {x: e.clientX - startPoint.x, y: e.clientY - startPoint.y}; lightboxImg.style.transform = `scale(${scale}) translate(${currTranslate.x}px, ${currTranslate.y}px)`; });
+        window.addEventListener('mouseup', () => { isPanning = false; lightboxImg.classList.remove('panning'); });
     </script>
 </body>
 </html>
-
-
-
