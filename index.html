@@ -119,8 +119,16 @@
                     </div>
 
                     <!-- Empty 2/3rds Area (Right Side) -->
-                    <div class="hidden md:block md:w-2/3">
-                        <!-- Reserved for future content -->
+                    <!-- 2/3rds Area (Right Side) with Image -->
+                    <div class="w-full md:w-2/3 relative mt-12 md:mt-0">
+                         <!-- Decorative background elements for the image -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-red/20 to-transparent rounded-3xl blur-2xl transform rotate-3"></div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-stone-700/50 hero-image-float">
+                            <!-- The requested image -->
+                            <img src="ABC.png" alt="Curated Collection of Fine Relief Carvings" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">
+                            <!-- Overlay gradient to ensure it blends well with the dark hero background -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
                     </div>
                 </div>
             </div>
